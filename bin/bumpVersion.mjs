@@ -95,7 +95,7 @@ const createGitTag = async (version) => {
 };
 
 (async () => {
-  console.log("Bumping version of `edge-extension-mute-tab-by-default`");
+  console.log("Bumping version of `edge-extension-disable-pull-to-refresh`");
 
   const manifestString = await fs.readFile(MANIFEST_PATH, { encoding: "utf8" });
   const manifestJson = JSON.parse(manifestString);

@@ -48,7 +48,7 @@ const buildOptionsPage = async () => {
 };
 
 (async () => {
-  console.log("Building `edge-extension-mute-tab-by-default`");
+  console.log("Building `edge-extension-disable-pull-to-refresh`");
 
   if (await isFileExist(BUILD_FOLDER_PATH)) {
     console.log("Deleting build/ folder");
