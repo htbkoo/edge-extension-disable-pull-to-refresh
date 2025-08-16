@@ -1,0 +1,9 @@
+/*
+  This CSS disables the pull-to-refresh functionality on mobile browsers.
+  It is useful for preventing unwanted page refreshes when users scroll down.
+ */
+body.pull-down-refresh--disabled {
+  overscroll-behavior: none;
+}
+
+

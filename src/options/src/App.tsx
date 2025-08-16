@@ -228,7 +228,7 @@ export const App = () => {
             <Toast.Body>
               Unfortunately, it has failed to save the configs, try again later
               or report the error to
-              https://github.com/htbkoo/edge-extension-mute-tab-by-default
+              https://github.com/htbkoo/edge-extension-disable-pull-to-refresh
             </Toast.Body>
           </Toast>
           <Toast

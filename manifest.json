@@ -11,10 +11,13 @@
     "256": "icons/256px-stop-icon.png",
     "512": "icons/512px-stop-icon.png"
   },
-  "options_page": "options.html",
-  "background": {
-    "service_worker": "service-worker.js"
-  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content/no-pull-refresh.js"],
+      "css": ["content/no-pull-refresh.css"]
+    }
+  ],
   "action": {
     "default_icon": {
       "16": "icons/16px-stop-icon.png",
@@ -26,8 +29,8 @@
     }
   },
   "permissions": [
-    "tabs",
-    "storage"
+    "scripting",
+    "activeTab"
   ],
   "author": "htbkoo"
 }

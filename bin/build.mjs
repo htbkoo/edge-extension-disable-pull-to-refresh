@@ -47,6 +47,34 @@ const buildOptionsPage = async () => {
   );
 };
 
+const buildContent = async () => {
+  const CONTENT_FOLDER_PATH = path.normalize(`${SRC_FOLDER_PATH}/content`);
+  const CONTENT_BUILD_FOLDER_PATH = path.normalize(`${BUILD_FOLDER_PATH}/content`);
+
+  const SERVICE_WORKER_SCRIPT_PATH = path.normalize(
+    `${CONTENT_FOLDER_PATH}/no-pull-refresh.ts`,
+  );
+  const BUILD_SERVICE_WORKER_SCRIPT_PATH = path.normalize(
+    `${CONTENT_BUILD_FOLDER_PATH}/no-pull-refresh.js`,
+  );
+
+  console.log("Building content script");
+  await esbuild.build({
+    entryPoints: [SERVICE_WORKER_SCRIPT_PATH],
+    outfile: BUILD_SERVICE_WORKER_SCRIPT_PATH,
+    // reference: https://esbuild.github.io/getting-started/#bundling-for-the-browser
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+  });
+  console.log("Built content script");
+
+  await cpWithLogging(
+    `${CONTENT_FOLDER_PATH}/no-pull-refresh.css`,
+    `${CONTENT_BUILD_FOLDER_PATH}/no-pull-refresh.css`,
+  );
+};
+
 (async () => {
   console.log("Building `edge-extension-disable-pull-to-refresh`");
 
@@ -60,27 +88,31 @@ const buildOptionsPage = async () => {
   await fs.mkdir(BUILD_FOLDER_PATH);
   console.log("Created build/ folder");
 
-  const SERVICE_WORKER_SCRIPT_PATH = path.normalize(
-    `${SRC_FOLDER_PATH}/service-worker/service-worker.ts`,
-  );
-  const BUILD_SERVICE_WORKER_SCRIPT_PATH = path.normalize(
-    `${BUILD_FOLDER_PATH}/service-worker.js`,
-  );
-
-  console.log("Building service-worker script");
-  await esbuild.build({
-    entryPoints: [SERVICE_WORKER_SCRIPT_PATH],
-    outfile: BUILD_SERVICE_WORKER_SCRIPT_PATH,
-    // reference: https://esbuild.github.io/getting-started/#bundling-for-the-browser
-    bundle: true,
-    minify: true,
-    sourcemap: true,
-  });
-  console.log("Built service-worker script");
+  // const SERVICE_WORKER_SCRIPT_PATH = path.normalize(
+  //   `${SRC_FOLDER_PATH}/service-worker/service-worker.ts`,
+  // );
+  // const BUILD_SERVICE_WORKER_SCRIPT_PATH = path.normalize(
+  //   `${BUILD_FOLDER_PATH}/service-worker.js`,
+  // );
+  //
+  // console.log("Building service-worker script");
+  // await esbuild.build({
+  //   entryPoints: [SERVICE_WORKER_SCRIPT_PATH],
+  //   outfile: BUILD_SERVICE_WORKER_SCRIPT_PATH,
+  //   // reference: https://esbuild.github.io/getting-started/#bundling-for-the-browser
+  //   bundle: true,
+  //   minify: true,
+  //   sourcemap: true,
+  // });
+  // console.log("Built service-worker script");
 
   console.log("Building options page");
   await buildOptionsPage();
   console.log("Built options page");
+
+  console.log("Building content/");
+  await buildContent();
+  console.log("Built content");
 
   const BUILD_MANIFEST_PATH = path.normalize(
     `${BUILD_FOLDER_PATH}/${MANIFEST_FILENAME}`,
