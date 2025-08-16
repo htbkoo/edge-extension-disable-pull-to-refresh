@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Disable Pull to Refresh",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A lightweight extension to disable the pull-to-refresh feature on Microsoft Edge on touch devices",
   "icons": {
     "16": "icons/16px-stop-icon.png",
@@ -13,9 +13,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": ["content/no-pull-refresh.js"],
-      "css": ["content/no-pull-refresh.css"]
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content/no-pull-refresh.js"
+      ],
+      "css": [
+        "content/no-pull-refresh.css"
+      ]
     }
   ],
   "action": {
