@@ -1,6 +1,6 @@
 {
   "name": "edge-extension-disable-pull-to-refresh",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "A lightweight extension to disable the pull-to-refresh feature on Microsoft Edge on touch devices",
   "main": "index.js",
