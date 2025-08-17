@@ -7,10 +7,10 @@ console.debug("=>(no-pull-refresh.js) script loaded");
 
 const DISABLE_PULL_TO_REFRESH_CLASS = "pull-down-refresh--disabled";
 
-const appendClassToBody = () => {
-  console.debug("=>(no-pull-refresh.js) appendClassToBody");
+const appendPullDownRefreshDisabledClassToHtml = () => {
+  console.debug("=>(no-pull-refresh.js) appendNoPullRefreshClassToHtml");
 
-  document.body.classList.add(DISABLE_PULL_TO_REFRESH_CLASS);
+  document.documentElement.classList.add(DISABLE_PULL_TO_REFRESH_CLASS);
 };
 
-appendClassToBody();
+appendPullDownRefreshDisabledClassToHtml();
